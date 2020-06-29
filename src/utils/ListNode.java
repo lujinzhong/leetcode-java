@@ -5,7 +5,7 @@ package utils;
  */
 public class ListNode {
     /** 数据域*/
-    int val;
+    public int val;
     /** 指针域 */
     public ListNode next;
     /** 设置值 */

@@ -73,10 +73,33 @@ public class LinkList {
     /**
      * 获取链表的头节点
      *
-     * @return
+     * @return ListNode
      */
     public ListNode getHead() {
         return this.head;
+    }
+
+    /**
+     * 创建有环的链表
+     * @param data
+     * @param  pos
+     * @return ListNode
+     */
+    public ListNode LoopList(int[] data, int pos) {
+      addSomeNode(data);
+      //找到最后一个节点，让他连接上第 pos 个节点
+        ListNode cur = this.head;
+        for (int i=0; i<=pos; i++) {
+            cur = cur.next;
+        }
+        //保存节点
+        ListNode posNode = cur;
+        //用最后一个节点来处理
+        while(cur.next != null) {
+            cur = cur.next;
+        }
+        cur.next = posNode;
+        return head;
     }
 
 
