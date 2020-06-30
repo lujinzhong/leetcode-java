@@ -1,13 +1,13 @@
-package leetcode206;
+package utils;
 
 /**
  * 节点类
  */
 public class ListNode {
     /** 数据域*/
-    int val;
+    public int val;
     /** 指针域 */
-    ListNode next;
+    public ListNode next;
     /** 设置值 */
     ListNode(int x) { val = x; }
 }
