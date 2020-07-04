@@ -16,7 +16,7 @@ public class KthLargest {
         // 遍历添加所有元素
         for (int num : nums
         ) {
-          add(num);
+            add(num);
         }
     }
 
@@ -24,7 +24,7 @@ public class KthLargest {
      * 维护一个 limit 大小的最小堆
      */
     public int add(int val) {
-        if (queue.size() < limit ) { // 维护这个堆大小为 limit
+        if (queue.size() < limit) { // 维护这个堆大小为 limit
             queue.add(val);
         } else if (val > queue.peek()) { // 新来的比堆顶大，说明要替换，因为比堆顶小的话，就比整个数据流都小
             // 大的话替换堆顶元素
