@@ -14,6 +14,7 @@ public class Test {
 
     /**
      * 滑动窗口最大值 （最大堆解法，但是在leetcode 第 17 个用例 会超时)
+     *
      * @param nums 数组
      * @param k    窗口大小
      * @return 最大值数组
@@ -54,6 +55,45 @@ public class Test {
             }
         }
         maxArr[length - k] = queue.peek();// 添加最大值
+        return maxArr;
+    }
+
+    /**
+     * 双向队列实现
+     *
+     * @param nums 数组
+     * @param k    窗口大小
+     * @return 最大数组
+     */
+    public int[] maxSlidingWindowTwo(int[] nums, int k) {
+        int length = nums.length;
+        if (length < 2) return nums;
+
+        int[] maxArr = new int[length - k + 1];
+        LinkedList<Integer> window = new LinkedList<>();// 双端队列
+
+        for (int i = 0; i < length; i++) {
+            // 每次新来一个元素，就干掉队列中又老又小的
+            while (!window.isEmpty() && nums[i] >= nums[window.peekLast()]) {
+                window.pollLast();
+            }
+            // 将当前的加进窗口中
+            window.addLast(i);
+            // 判断一下窗口是否超过了 k 大小, i-k 是窗口的左边索引，对头小于它说明，它已经是走过的了
+            // 这里这么理解，假设 K = 3，那么 i =3 的时候 i-k=0, 我们可以知道窗口的左边最小也是从0 开始
+            // 因此 小于 0 就不合法了，另外一种情况是，当 i = 5 的时候， i-k = 2,说明 我们已经遍历到
+            // 第六个元素了，窗口最左边最小也是 5 - k = 5 -3 = 2,如果队列的下标还存在 比 2小的，那么这个窗口
+            // 就炸了，这是为了避免后面的值一直比左边的小导致一直入队，炸窗口导致
+            if (window.peek() <= i - k) {
+                window.poll();
+            }
+
+            if (i + 1 >= k) { //这里是因为窗口满足了 k 个才有比较窗口最大值，
+                // 当遍历次数 小于 3 的时候，窗口还没有 满，那这时候就不应该比较大小
+                maxArr[i + 1 - k] = nums[window.peek()];
+            }
+
+        }
         return maxArr;
     }
 
