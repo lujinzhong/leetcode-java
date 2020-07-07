@@ -4,10 +4,6 @@ import java.util.HashMap;
 
 public class Test {
 
-    public static void main(String[] args) {
-
-    }
-
     /**
      * 哈希表实现
      * @param s 字符串1
@@ -50,6 +46,7 @@ public class Test {
         int[] count = new int[26]; // 26 个字母
         // 思路是，根据 26 字母的 ascll 值来求差索引
         // 如果某个字母两个字符拥有的个数相同，则累加值可以相互抵消 变为 0
+        // 或者用两个数组，都是加 1，再判断两个数组是否相同
         for (char c: s.toCharArray()
              ) {
             count[c - 'a'] +=1;
